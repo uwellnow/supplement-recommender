@@ -1,0 +1,13 @@
+# ** lightFM이 python3.11 버전에서 유효하기 때문에 가상환경을 설정해주어야 함 **
+
+# jupyter terminal에서 다음을 코드를 실행하여 python 3.11 버전을 갖는 가상환경을 활성화
+# 후에 kernel을 lightFM으로 변경
+
+conda create -n lightfm_new pythoconda create -n lightfm_python311 python=3.11 -y
+conda install -c conconda install -c conda-forge lightfm ipykernel -y
+python -m ipykernelpython -m ipykernel install --user --name lighfm_new --display-name "Python 3.1F1 --display-name "Python 3.11 (LightFM Ready)"
+
+# 이후 터미널에서 pandas 설치
+conda install -c conda-forge pandas scipy --force-reinstall -y
+conda install -c conda-forge scikit-learn -y
+conda install openpyxl -y
