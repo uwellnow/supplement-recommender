@@ -1,0 +1,54 @@
+﻿ingredient,rule_type,priority,variable,condition,operation,value,unit,source
+creatine,base_dose,1,training_experience,"!= ""초보""",set,5,g,Consensus
+creatine,base_dose,1,training_experience,초보,set,3,g,"Gann et al., 2015"
+creatine,adjustment,2,weight_kg,> 100,set_range,5-10,g,"Kreider et al., 2017"
+creatine,adjustment,2,diet_type,채식 위주,add_suggestion,,,"Lukaszuk et al., 2005"
+creatine,exception,3,health_conditions,"CONTAINS ""신장 질환""",prohibit,0,g,Consensus
+creatine,exception,3,is_dehydrated,TRUE,prohibit,0,g,"Moussa et al., 2021"
+caffeine,base_dose,1,,,set,150,mg,Safety Consensus
+caffeine,adjustment,2,user_goal,"CONTAINS ""퍼포먼스""",set_range,200-250,mg,"Spriet, 2014"
+caffeine,adjustment,2,workout_time,저녁,multiply,0.5,,"Silva et al., 2025"
+caffeine,exception,3,health_conditions,"CONTAINS ""수면장애""",prohibit,0,mg,Safety Consensus
+caffeine,exception,3,health_conditions,"CONTAINS ""고혈압""",prohibit,0,mg,"Peveler et al., 2017"
+caffeine,exception,3,health_conditions,"CONTAINS ""불안장애""",prohibit,0,mg,"Guest et al., 2021"
+arginine,base_dose,1,user_goal,"CONTAINS ""근성장""",set,6,g,"Zajac et al., 2010"
+arginine,exception,3,health_conditions,"CONTAINS ""저혈압""",prohibit,0,g,Logical Precaution
+arginine,exception,3,health_conditions,"CONTAINS ""MELAS""",prohibit,0,g,"Anderson et al., 2024"
+l-theanine,base_dose,1,user_goal,회복,set,50,mg,"Jäger et al., 2008"
+l-theanine,base_dose,1,user_goal,집중력,set_range,100-200,mg,Consensus
+l-theanine,adjustment,2,current_stack,"CONTAINS ""caffeine""",add_suggestion,,,"Shields et al., 2014"
+glycerol,base_dose,1,workout_duration,>= 60,set,6,g,Market Consensus
+glycerol,adjustment,2,workout_environment,고온다습,add,4,g,"Beis et al., 2011"
+glycerol,exception,3,workout_duration,< 60,prohibit,0,g,"Jardine et al., 2023"
+nitrate,base_dose,1,,,set,500,mg,"d'Unienville et al., 2021"
+nitrate,adjustment,2,user_gender,여성,set,372,mg,Precautionary
+nitrate,exception,3,workout_environment,고온다습,prohibit,0,mg,"Smith et al., 2019"
+nitrate,exception,3,oral_hygiene,구강청결제 사용,add_warning,,,"Wickham et al., 2021"
+taurine,base_dose,1,user_goal,회복,set,2,g,"Ra et al., 2013"
+taurine,base_dose,1,user_goal,고온환경,expression,weight_kg * 50,mg,"Peel et al., 2024"
+taurine,exception,3,current_stack,"CONTAINS ""caffeine""",prohibit,0,g,User Decision
+whey_protein,base_dose,1,user_goal,"!= ""체지방 감소""",expression,weight_kg * 1.6,g,"ISSN, 2017"
+whey_protein,base_dose,1,user_goal,체지방 감소,expression,lbm_kg * 2.3,g,"Helms et al., 2014"
+whey_protein,adjustment,2,age,>= 60,set_min,30,g,"Phillips, 2014"
+whey_protein,exception,3,health_conditions,"CONTAINS ""유당 불내증""",recommend_alternative,WPI/WPH,,"Roy, 2008"
+casein,base_dose,1,user_goal,"CONTAINS ""회복""",set_range,30-40,g,Consensus
+casein,adjustment,2,workout_time,저녁/밤,set_range,40-45,g,"Trommelen et al., 2023"
+casein,exception,3,workout_type,유산소,prohibit,0,g,"Oosthuyse et al., 2021"
+casein,exception,3,health_conditions,"CONTAINS ""유당 불내증""",recommend_alternative,WPI/WPH,,"Babault et al., 2014"
+bcaa,base_dose,1,user_goal,회복,set_range,10-20,g,"Salem et al., 2024"
+bcaa,base_dose,1,user_goal,"CONTAINS ""퍼포먼스""",set_range,5-10,g,Intra-workout use
+bcaa,adjustment,2,user_goal,근성장,add_suggestion,,,"Wolfe, 2017"
+bcaa,interaction,4,user_goal,회복,add_synergy,taurine,2g,"Ra et al., 2013"
+betaine,base_dose,1,age,> 19,set,2.5,g,"Ismaeel, 2017"
+betaine,base_dose,1,age,<= 19,set,2,g,"Nobari et al., 2021"
+betaine,exception,3,user_goal,"CONTAINS ""펌핑감""",prohibit,0,g,"Bloomer et al., 2011"
+betaine,exception,3,workout_environment,고온,add_warning,,,"Armstrong et al., 2008"
+glutamine,base_dose,1,exercise_type,장시간_고강도_지구력,set_post_workout,5,g,"Walsh et al., 1998"
+glutamine,base_dose,1,workout_environment,고온,expression_pre_workout,lbm_kg * 0.25,g,"Pugh et al., 2017"
+glutamine,exception,3,user_goal,"CONTAINS ""근력_향상""",prohibit,0,g,"Candow et al., 2001"
+glutamine,exception,3,user_goal,"CONTAINS ""근성장_촉진""",prohibit,0,g,"Antonio et al., 2002"
+glutamine,exception,3,health_conditions,"CONTAINS ""신장 질환""",prohibit,0,g,Safety Precaution
+l-carnitine,base_dose,1,user_goal,회복,set,1,g,"Spiering et al., 2007"
+l-carnitine,adjustment,2,training_intensity,고,set,2,g,"Kraemer et al., 2003"
+l-carnitine,exception,3,intake_period,만성,add_warning,,,"Sawicka et al., 2020"
+l-carnitine,exception,3,cvd_risk,예,add_warning,,,"Sawicka et al., 2020"
