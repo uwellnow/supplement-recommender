@@ -1,0 +1,68 @@
+﻿ingredient,rule_type,priority,variable,condition,operation,value,unit,timing,source,,,
+creatine,base_dose,1,training_experience,"!= ""초보""",set,5,g,후,Consensus,,,섭취 타이밍 추가
+creatine,base_dose,1,training_experience,초보,set,3,g,후,"Gann et al., 2015",,,
+creatine,adjustment,2,weight_kg,> 100,set_range,05-10,g,후,"Kreider et al., 2017",,,
+creatine,adjustment,2,age,>60,set,01-03,ㅎ,후,,,,
+creatine,adjustment,2,diet_type,채식 위주,add_suggestion,,,후,"Lukaszuk et al., 2005",,,"이 규칙은 특별히 함량에 변화를 주지는 않으나, 채식 위주일 경우 ""크레아틴 보충 효과가 더 클 가능성이 높음"" 안내 출력"
+creatine,exception,3,health_conditions,"CONTAINS ""신장 질환""",prohibit,0,g,,Consensus,,,
+creatine,exception,3,health_conditions,"CONTAINS ""신장(콩팥) 질환""",prohibit,0,g,,"Moussa et al., 2021",,,수분 섭취 제한중인 경우 금지
+caffeine,base_dose,1,,,set,weight_kg * 2.5,mg,전,Safety Consensus,,,카페인 섭취량을 체중을 기준으로 제공.
+caffeine,base_dose,1,,,set_range,<400,mg,,국내 성인 카페인 권장량 기준,,,카페인 제공량의 상한선을 400mg으로 제한
+caffeine,adjustment,2,user_goal,"CONTAINS ""근지구력 향상"" OR ""근력/파워 향상"" OR ""유산소 능력 향상""",set_range,200-250,mg,전,"Spriet, 2014",,,
+caffeine,adjustment,2,user_goal,"CONTAINS ""근지구력 향상"" OR ""근력/파워 향상"" OR ""유산소 능력 향상""",set_range,>250,mg,전,"Hudson et al., 2008, RCT; Duncan & Oxford, 2011, RCT; Ganio et al., 2009, SR",,,"AND training_experience==""중급"" OR ""숙련자"""
+caffeine,adjustment,2,training_experience,초보,set,100,mg,전,"Hendrix et al., 2010, RCT; Beck et al., 2008, RCT",,,
+caffeine,adjustment,2,user_goal,"CONTAINS ""근지구력 향상"" OR ""근력/파워 향상"" OR ""유산소 능력 향상""",set,weight_kg*3.5,mg,전,"Kennedy & Wightman, 2022, Review",,,"카페인을 제공하는 제공량의 기본 규칙은 체중당 2mg이나, 집중력이라는 목적을 포함할 때와 포함하지 않을 때의 함량 공식이 달라지는 조건"
+caffeine,adjustment,2,workout_time,저녁,multiply,0.5,,전,"Silva et al., 2025",,,"훈련 시간이 아침 또는 오전일 경우 오전 운동 시 수행 능력 저하를 방지하고 향상시키는 데 특히 효과적입니다."" 라는 안내 문구 추가 부탁드립니당"
+caffeine,exception,3,health_conditions,"CONTAINS ""수면장애""",prohibit,0,mg,전,Safety Consensus,,,
+caffeine,exception,3,health_conditions,"CONTAINS ""고혈압""",prohibit,0,mg,전,"Peveler et al., 2017",,,
+caffeine,exception,3,health_conditions,"CONTAINS ""불안장애""",prohibit,0,mg,전,"Guest et al., 2021",,,
+caffeine,exception,3,caffeine_habbit,"==""거의 마시지 않음""",prohibit,0,g,,,,,평소 카페인을 얼마나 이용하는지에 대한 질문의 답변을 토대로 거의 이용하지 않을 경우 금지
+caffeine,interaction,4,current_stack,"CONTAINS ""caffeine"">150mg",add_synergy,150,mg,전,"Shields et al., 2014; Kennedy & Wightman, 2022)",,,테아닌
+arginine,base_dose,1,user_goal,"CONTAINS ""근성장"" OR ""펌핑감 극대화"" OR ""근회복 지원""",set,6,g,전,"Zajac et al., 2010",,,
+arginine,base_dose,1,user_goal,"CONTAINS ""집중력 유지"" OR ""운동 중 에너지""",set,weight_kg*0.05,g,전,"Chen et al., 2016",,,
+arginine,exception,3,health_conditions,"CONTAINS ""신장질환""",prohibit,0,g,,"Anderson et al., 2024",,,
+arginine,exception,3,health_conditions,"CONTAINS ""저혈압""",prohibit,0,g,,Logical Precaution,,,
+arginine,exception,3,health_conditions,"CONTAINS ""MELAS""",prohibit,0,g,,"Anderson et al., 2024",,,
+arginine,interaction,4,user_goal,"CONTAINS ""집중력 유지"" OR ""운동 중 에너지""",add_synergy,weight_kg*0.17,g,전,"Chen et al., 2016",,,시너지 BCAA 추가
+l-theanine,base_dose,1,user_goal,"CONTAINS ""운동 후 안정""",set,50,mg,후,"Jäger et al., 2008",,,
+l-theanine,base_dose,1,user_goal,"CONTAINS ""운동 중 집중""",set,100-200,mg,전,Consensus,,,
+l-theanine,base_dose,1,user_goal,"CONTAINS ""면역 지원""",set,150,mg,전/후 각각,Juszkiewicz et al. (2019),,,
+l-theanine,adjustment,2,current_stack,"CONTAINS ""caffeine""",add_suggestion,,,전,"Shields et al., 2014",,,"""카페인으로 인한 불안감을 완화하여 집중의 질을 높일 수 있습니다."" 안내문구 출력"
+glycerol,base_dose,1,user_goal,"CONTAINS ""펌핑감 극대화"" OR ""지구력 향상"" ",set,weight_kg*0.1,g,전,"Ziegenfuss et al., 2008",,,
+glycerol,adjustment,2,sweat_amount,"== ""많이 흘린다""",add,4,g,전,"Beis et al., 2011",,,운동 중 땀을 많이 흘리는지 여부를 묻는 질문으로 대체할 예정. 함량 추가 옵션
+glycerol,adjustment,2,sweat_amount,"== ""적당히 흘린다""",add,2,g,전,"Beis et al., 2011",,,
+glycerol,exception,3,workout_duration,< 60,prohibit,0,g,,"Jardine et al., 2023",,,
+glycerol,exception,3,health_conditions,"CONTAINS ""위장 장애"" OR ""의도적으로 물 섭취를 제한하고 있음"" OR ""신장(콩팥) 질환""",prohibit,0,g,,,,,
+nitrate,base_dose,1,user_goal,"CONTAINS ""펌핑감 극대화"" OR ""근력 향상"" ",set,500,mg,전,"Coggan et al., 202",,,운동 전 급성 질산염 섭취는 펌핑감과 근력 향상에 도움이 됩니다'문구 출력
+nitrate,base_dose,1,user_goal,"CONTAINS ""지구력 향상""",set,500,mg,전,"Poon et al., 2025",,,지구력 향상을 위한 목표로는 3일 이상의 꾸준한 섭취가 권장됩니다
+nitrate,adjustment,2,user_gender,여성,set,300,mg,전,d'Unienville et al,,,
+nitrate,exception,3,sweat_amount,많이 흘린다,prohibit,0,mg,전,"Smith et al., 2019",,,
+nitrate,exception,3,oral_hygiene,구강청결제 사용,add_warning,,,,"Wickham et al., 2021",,,향균성 구강청결제 사용시 질산염 보충의 효과가 감소할 수 있습니다. 출력
+taurine,base_dose,1,,,set,1,g,전,Consensus,,,
+taurine,base_dose,1,user_goal,회복,set,2,g,후,"Ra et al., 2013",,,
+taurine,base_dose,1,sweat_amount,많이 흘린다,expression,weight_kg * 50,mg,전,"Peel et al., 2024",,,
+taurine,exception,3,caffeine_habbit,"==""거의 마시지 않음""",prohibit,0,g,,"Kurtz et al., 2021",,,추가
+taurine,exception,3,current_stack,"CONTAINS ""caffeine""",prohibit,0,g,,User Decision,,,카페인 포함 AND 운동 타입==유산소 일 경우 타우린 제외
+whey_protein,base_dose,1,user_goal,"!= ""체지방 감소""",set,weight_kg * 1.6*0.4,g,후,"ISSN, 2017",,,일일 단백질 섭취량인 weight_kg * 1.6의 1/4함량을 제공합니다. 출력
+whey_protein,base_dose,1,user_goal,체지방 감소,set,lbm_kg * 2.3,g,후,"Helms et al., 2014",,,체지방 감소를 위한 사용자의 단백질 섭취 권장량은 제지방량*2.3g입니다. 운동 후 1/4 함량을 추천드립니다. 출력
+whey_protein,adjustment,2,age,>= 60,set_min,30,g,후,"Phillips, 2014",,,60세 이상 사용자는 단백질 추천 섭취량이 더 높습니다. 출력
+whey_protein,exception,3,health_conditions,"CONTAINS ""유당 불내증""",recommend_alternative,WPI/WPH,,후,"Roy, 2008",,,유당불내증 포함시 웨이 프로틴 제품 중 WPC 제외한 WPI 또는 WPH를 추천
+whey_protein,,,,,,,,,,,,"운동 전 식사를 하지 않았을 시 ""운동 후 즉시 섭취를 권장드립니다."" 출력"
+whey_protein,,,,,,,,,,,,목적에 회복 포함 AND 유당불내증 없을 시 카제인으로 변경
+casein,base_dose,1,user_goal,"CONTAINS ""회복""",set_range,30-40,g,후,Consensus,,,
+casein,adjustment,2,workout_time,저녁/밤,set_range,40-45,g,후,"Trommelen et al., 2023",,,취침 전 카제인 섭취는 수면 중 단백질 합성에 도움이 됩니다
+casein,exception,3,workout_type,유산소,prohibit,0,g,,"Oosthuyse et al., 2021",,,
+casein,exception,3,health_conditions,"CONTAINS ""유당 불내증""",recommend_alternative,WPI/WPH,,후,"Babault et al., 2014",,,
+bcaa,base_dose,1,user_goal,"CONTAINS ""회복"" OR ""근성장"" ",set_range,10-20,g,후,"Salem et al., 2024",,,bcaa는 RULE BASE에서는 eaa와 같다고 봅니다.
+bcaa,base_dose,1,user_goal,"CONTAINS ""퍼포먼스""",set_range,05-10,g,중,Intra-workout use,,,
+bcaa,interaction,4,user_goal,회복,add_synergy,2,g,후,"Ra et al., 2013",,,시너지 타우린 추가
+betaine,base_dose,1,age,> 19,set,2.5,g,전,"Ismaeel, 2017",,,
+betaine,base_dose,1,age,<= 19,set,2,g,전,"Nobari et al., 2021",,,
+betaine,exception,3,user_goal,"CONTAINS ""펌핑감""",prohibit,0,g,전,"Bloomer et al., 2011",,,
+betaine,exception,3,sweat_amount,많이 흘린다,prohibit,0,g,전,"Armstrong et al., 2008",,,
+glutamine,base_dose,1,workout_duration,>=60,set_,5,g,후,"Walsh et al., 1998",,,
+glutamine,base_dose,1,user_goal,"CONTAINS ""회복"" OR ""근성장"" OR ""면역지원"" ",set_,5,g,후,,,,
+glutamine,exception,3,health_conditions,"CONTAINS ""신장 질환"" OR ""간질환"" ",prohibit,0,g,,Safety Precaution,,,
+l-carnitine,base_dose,1,user_goal,"CONTAINS ""회복""",set,1,g,,"Spiering et al., 2007",,,
+l-carnitine,adjustment,2,training_intensity,고,set,2,g,,"Kraemer et al., 2003",,,
+l-carnitine,exception,3,health_conditions,"CONTAINS ""심혈관계 질환""",add_warning,,,,"Sawicka et al., 2020",,심혈관계 질환 보유시 충분한 탄수화물과 함께 섭취하세요,
